@@ -42,23 +42,23 @@ Renderer を持っている適当なオブジェクトの Inspector から AddCo
 　よくわからない場合は触らないでおいてください
 
 ・ResultMemory<br>
-　全テクスチャの使用メモリが表示されます<br>
+　取得した全テクスチャの使用メモリが表示されます<br>
 　ビルドターゲットに関係なく(iOSやAndroid版ではなく)、<br>
 　エディタでの使用メモリが表示されることに注意してください
 
 ・ResultSize<br>
-　テクスチャのピクセルサイズ別の枚数が表示されます<br>
+　取得したテクスチャのピクセルサイズ別の枚数が表示されます<br>
 
 ・ResultName<br>
-　全テクスチャの名前一覧が表示されます
+　取得した全テクスチャの名前が表示されます
  
 
 <img src="http://many.chu.jp/Unity/MaruchuTextureChecker/a/Inspector2.png" alt="Inspectorの値">
 
 ・ResultMatList<br>
-　配下の全マテリアルが表示されます<br>
+　配下で取得した全マテリアルが表示されます<br>
 ・ResultTexList<br>
-　配下の全テクスチャが表示されます
+　配下で取得した全テクスチャが表示されます
 
 
 <br><br><br><br>
