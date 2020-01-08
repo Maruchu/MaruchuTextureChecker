@@ -1,4 +1,16 @@
-﻿#if UNITY_EDITOR
+﻿/*
+ * MaruchuTextureChecker
+ * 
+ * Copyright(C) 2020 ㊥Maruchu
+ * 
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+
+
+
+
+#if UNITY_EDITOR
 using UnityEngine;
 using UnityEngine.Profiling;
 using System.Collections.Generic;
