@@ -39,12 +39,12 @@ public class MaruchuTextureChecker : MonoBehaviour
     //結果表示　使用メモリ用
     [SerializeField, Multiline(2)]
     private string resultMemory = string.Empty;
-    //結果表示　サイズ別の枚数表示用
+    //結果表示　サイズ(ピクセル数)別の枚数表示用
     [SerializeField, Multiline(8)]
     private string resultSize = string.Empty;
-    //結果表示　一覧表示用
+    //結果表示　詳細表示用
     [SerializeField, Multiline(10)]
-    private string resultLog = string.Empty;
+    private string resultName = string.Empty;
 
     //マテリアル一覧表示用
     [SerializeField]
@@ -54,7 +54,7 @@ public class MaruchuTextureChecker : MonoBehaviour
     private List<Texture> resultTexList = new List<Texture>();
 
     //サイズの記憶用
-    private Dictionary<int, int> texSizeDict = new Dictionary<int, int>();
+    private Dictionary<Vector2Int, int> texSizeDict = new Dictionary<Vector2Int, int>();
 
 
 
@@ -78,6 +78,7 @@ public class MaruchuTextureChecker : MonoBehaviour
 
         //容量チェック
         Renderer[] array = gameObject.GetComponentsInChildren<Renderer>();
+        Vector2Int texSize;
         foreach (Renderer rend in array)
         {
             //Material確認
@@ -105,16 +106,16 @@ public class MaruchuTextureChecker : MonoBehaviour
                         resultTexList.Add(tempTex);
 
                         //Dictionaryでサイズ別に枚数を記憶
-                        int sizeX = (int)(1.0f / tempTex.texelSize.x);
-                        if (texSizeDict.ContainsKey(sizeX))
+                        texSize = GetTexSize(tempTex);
+                        if (texSizeDict.ContainsKey(texSize))
                         {
                             //枚数を+1
-                            texSizeDict[sizeX]++;
+                            texSizeDict[texSize]++;
                         }
                         else
                         {
                             //1枚め
-                            texSizeDict.Add(sizeX, 1);
+                            texSizeDict.Add(texSize, 1);
                         }
                     }
                 }
@@ -128,31 +129,41 @@ public class MaruchuTextureChecker : MonoBehaviour
             }
         }
 
-        //書き出し
-        string texResult = name + " 以下の取得可能なテクスチャ一覧\n\n";
-        long allMem = 0;
-        foreach (var temp in resultTexList)
+        //出力
         {
-            //容量取得
-            long useMem = Profiler.GetRuntimeMemorySizeLong(temp);
-            allMem += useMem;
-            //サイズ(Xで確認)
-            int sizeX = (int)(1.0f / temp.texelSize.x);
-            texResult += temp.name + " (" + sizeX + "px, " + (useMem / 1024f / 1024f).ToString("0.00") + "MB)\n";
-        }
-        string sizeResult = name + " 以下のテクスチャサイズ別 枚数\n\n";
-        foreach (var key in texSizeDict.Keys)
-        {
-            //枚数一覧
-            sizeResult += key + "px = " + texSizeDict[key] + "枚\n";
-        }
+            //結果表示用の文字列を作る
+            string sizeResult = name + " 以下のテクスチャサイズ別 枚数\n\n";
+            foreach (var key in texSizeDict.Keys)
+            {
+                //枚数一覧
+                sizeResult += key + "px = " + texSizeDict[key] + "枚\n";
+            }
+            string nameResult = name + " 以下の取得可能なテクスチャ一覧\n\n";
+            long allMem = 0;
+            foreach (var temp in resultTexList)
+            {
+                //容量取得
+                long useMem = Profiler.GetRuntimeMemorySizeLong(temp);
+                allMem += useMem;
+                //サイズ表示
+                texSize = GetTexSize(temp);
+                nameResult += temp.name + "\t\t(" + texSize.x + "x" + texSize.y + "px, " + (useMem / 1024f / 1024f).ToString("0.00") + "MB)\n";
+            }
 
-        //Inspector表示用
-        resultMemory = (allMem / 1024f / 1024f).ToString("0.00") + " MByte\n(" + allMem + " Byte)";
-        resultSize = sizeResult;
-        resultLog = texResult;
-        //デバッグ出力
-        Debug.LogWarning("---- MARUCHU TEXTURE CHECKER ----\nMemSize = " + (allMem / 1024f / 1024f).ToString("0.00") + "MB\n\n--------\n" + sizeResult + "\n--------\n" + texResult + "\n--------\n");
+            //Inspector表示用
+            resultMemory = (allMem / 1024f / 1024f).ToString("0.00") + " MByte\n(" + allMem + " Byte)";
+            resultSize = sizeResult;
+            resultName = nameResult;
+            //デバッグ出力
+            Debug.LogWarning("---- MARUCHU TEXTURE CHECKER ----\nMemSize = " + (allMem / 1024f / 1024f).ToString("0.00") + "MB\n\n--------\n" + sizeResult + "\n--------\n" + nameResult + "\n--------\n");
+        }
+    }
+    /// <summary>
+    /// テクスチャのチェックと書き出し実行
+    /// </summary>
+    private Vector2Int GetTexSize(Texture tempTex)
+    {
+        return new Vector2Int((int)(1.0f / tempTex.texelSize.x), (int)(1.0f / tempTex.texelSize.y));
     }
 }
 
