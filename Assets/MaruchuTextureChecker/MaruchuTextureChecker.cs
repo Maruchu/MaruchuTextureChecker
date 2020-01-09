@@ -149,7 +149,7 @@ public class MaruchuTextureChecker : MonoBehaviour
             foreach (var key in texSizeDict.Keys)
             {
                 //枚数一覧
-                sizeResult += key + "px = " + texSizeDict[key] + "枚\n";
+                sizeResult += key.x + "x" + key.y + "px = " + texSizeDict[key] + "枚\n";
             }
             string nameResult = name + " 以下の取得可能なテクスチャ一覧\n\n";
             long allMem = 0;
