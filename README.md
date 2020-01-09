@@ -65,3 +65,8 @@ Renderer を持っている適当なオブジェクトの Inspector から AddCo
 
 ## ライセンス
 ㊥MaruchuテクスチャチェッカーにはMITライセンスが適用されています<br>
+
+サンプルとして同梱されているユニティちゃんの各種アセットには<br>
+ユニティちゃんライセンスが適用されています<br>
+© Unity Technologies Japan/UCL
+
