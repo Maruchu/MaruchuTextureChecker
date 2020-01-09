@@ -42,6 +42,7 @@ public class MaruchuTextureChecker : MonoBehaviour
         "_SpecularReflectionSampler",
         "_EnvMapSampler",
         "_NormalMapSampler",
+        "_AlphaMask",
     };
 
     //初期化フラグ
@@ -94,7 +95,7 @@ public class MaruchuTextureChecker : MonoBehaviour
         foreach (Renderer rend in array)
         {
             //Material確認
-            foreach (Material mat in rend.materials)
+            foreach (Material mat in rend.sharedMaterials)
             {
                 //Texture確認
                 foreach (string propName in checkPropNameArray)
