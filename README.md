@@ -21,6 +21,15 @@ Copyright(C) 2020 [㊥Maruchu](https://twitter.com/Maruchu "㊥Maruchu")
 
 ## 使い方
 
+MaruchuTextureCheckerスクリプトをAddComponentしてください、Consoleに結果が表示されます。
+
+<img src="http://many.chu.jp/Unity/MaruchuTextureChecker/b/Editor3.gif" alt="使い方3">
+
+
+<br><br><br><br>
+
+## 詳細な手順(初心者向け)
+
 Unity でプロジェクトを開いたら、Projectタブから Assets/Sample1 というシーンを開いてみてください。<br>
 Hierarchyタブに unitychan というオブジェクトがあるのを確認してクリックします。
 
