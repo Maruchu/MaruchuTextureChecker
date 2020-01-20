@@ -6,8 +6,8 @@
 
 Copyright(C) 2020 [㊥Maruchu](https://twitter.com/Maruchu "㊥Maruchu")
 
-> 制作環境：Unity2019.2
-> 動作確認：Unity20118.4、Unity2019.2
+> 制作環境：Unity2019.2<br>
+> 動作確認：Unity20118.4、Unity2019.2<br>
 
 
 <br><br>
